@@ -1,6 +1,6 @@
 const express = require("express");
 const swaggerUi = require("swagger-ui-express");
-const logger = require("./config/logsConfig");
+//const logger = require("./config/logsConfig");
 const swaggerJsDoc = require("swagger-jsdoc");
 const db = require("./infrastructure/postgresDB");
 const dotenv = require("dotenv");
@@ -38,7 +38,7 @@ app.get("/", (request, response) => {
 //cofig Swagger
 const swaggerOptions = {
     definition: {
-        openapi: '1.0.0',
+        openapi: '3.0.0',
         info: {
             title: 'Desarrollo de modulo de servicios de prueba BdB',
             version: '1.0.0',

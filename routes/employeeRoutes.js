@@ -1,22 +1,22 @@
 const express = require("express");
-const adCityController = require("../controllers/adCityController");
+const employeeController = require("../controllers/employeeController");
 const router = express.Router();
 
 /**
    * @swagger
-   * /compras:
+   * /employee:
    *   get:
-   *     description: Returns compras
+   *     description: listado de emoleados!
    *     tags:
-   *      - Compras
+   *      - Employee
    *     produces:
    *      - application/json
    *     responses:
    *       200:
-   *         description: compras
+   *         description: employee
 */
 
-router.get('/employee',); 
+router.get('/employee',employeeController.getEmployee); 
 
 
 module.exports = router;
