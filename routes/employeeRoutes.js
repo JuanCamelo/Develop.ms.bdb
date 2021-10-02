@@ -16,7 +16,7 @@ const router = express.Router();
    *         description: employee
 */
 
-router.get('/employee',employeeController.getEmployee); 
+router.get('/employee', employeeController.getEmployee);
 
 
 module.exports = router;

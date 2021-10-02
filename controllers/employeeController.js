@@ -1,18 +1,18 @@
 /**
  * Controler used to mange Employee 
  */
- const response = require("./responses/responses");
- const dbTransaction = require("../infrastructure/commands/DBTransaction/DbTransactionCommandsMudule");
+const response = require("./responses/responses");
+const dbTransaction = require("../infrastructure/commands/DBTransaction/DbTransactionCommandsMudule");
 
- const employeeQueries = require("../infrastructure/queries/getEmployeeQueriesModule");
+const employeeQueries = require("../infrastructure/queries/getEmployeeQueriesModule");
 
 
- /**
- * Get adCity
- * @param {} req 
- * @param {*} res 
- * @param {*} next 
- */
+/**
+* Get adCity
+* @param {} req 
+* @param {*} res 
+* @param {*} next 
+*/
 exports.getEmployee = async (req, res, next) => {
     try {
 
