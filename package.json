@@ -1,0 +1,29 @@
+{
+  "name": "develop.ms.dbd",
+  "version": "1.0.0",
+  "description": "desarrollo de software de pruebas ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuanCamelo/Develop.ms.bdb.git"
+  },
+  "author": "Juan Pablo Camelo Cifuentes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JuanCamelo/Develop.ms.bdb/issues"
+  },
+  "homepage": "https://github.com/JuanCamelo/Develop.ms.bdb#readme",
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.13",
+    "pg": "^8.7.1",
+    "swagger-jsdoc": "^6.1.0",
+    "swagger-ui-express": "^4.1.6",
+    "winston": "^3.3.3",
+    "winston-daily-rotate-file": "^4.5.5"
+  }
+}
