@@ -1,13 +1,13 @@
 const pool = require('../postgresDB');
 
-const getEmployee = async () => {
+const getEmployee = async (fullname, functions) => {
     try {
         const sqlQuery = `
             SELECT p. *
-            FROM productos.ventas p
-            WHERE p.id=p.id            
+            FROM productos.employee p
+            WHERE p.functions=${functions}  
+            AND p.fullname=${fullname}        
            `
-
         const result = await pool.DBConnection.query(sqlQuery);
         return result.rows;
 

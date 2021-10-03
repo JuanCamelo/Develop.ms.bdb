@@ -1,4 +1,5 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const swaggerUi = require("swagger-ui-express");
 //const logger = require("./config/logsConfig");
 const swaggerJsDoc = require("swagger-jsdoc");
@@ -15,7 +16,7 @@ if (process.env.NODE_ENV !== "production") {
 
 const app = express();
 db.initPoolDB();
-
+app.use(bodyParser.json()); // application/json
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
