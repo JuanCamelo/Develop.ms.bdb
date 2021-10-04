@@ -15,11 +15,11 @@ const employeeUpdateDTO = require("../infrastructure/models/employeUpdateDTO");
  * Create Employee
  */
 exports.createadEmployee = async (req, res, next) => {
-    try {        
+    try {
         const record = employeeDTO(
             req.body.employee.fullname,
             req.body.employee.functios
-        );      
+        );
 
         await dbTransaction.beginTransaction();
         const adEmployee = await employeeCommands.createEmployee(record);;
@@ -64,11 +64,11 @@ exports.updateadEmployee = async (req, res, next) => {
                     throw new Error("Exists a relationship boss and Employee");
             };
 
-            await employeeCommands.updateEmployee(record,IdEmployee);
+            await employeeCommands.updateEmployee(record, IdEmployee);
             await dbTransaction.commitTransaction();
         };
 
-        response.success(req, res, record.fullname , 201, "Employee record updated successfully!");
+        response.success(req, res, record.fullname, 201, "Employee record updated successfully!");
 
     } catch (error) {
         await dbTransaction.rollbackTransaction();
@@ -96,7 +96,7 @@ exports.deleteadEmployee = async (req, res, next) => {
         await employeeCommands.deleteEmployee(IdEmployee);
         await dbTransaction.commitTransaction();
 
-        response.success(req, res,getEmployeeBy.fullname , 201, "Employee record deleted successfully!");
+        response.success(req, res, getEmployeeBy.fullname, 201, "Employee record deleted successfully!");
 
     } catch (error) {
         await dbTransaction.rollbackTransaction();
