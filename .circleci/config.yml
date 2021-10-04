@@ -1,7 +1,8 @@
 version: 2.1
 jobs:    
+  build:
     docker:
-      - image: circle/node:10
+      - image: cimg/node:16.10.0
     steps:
       - checkout
       - run:
@@ -12,7 +13,7 @@ jobs:
           command: |
               ./node_modules/mocha/bin/mocha test/ --reporter mochawesome --reporter-options reportDir=test-result,reportFilename=test-result
       - store_test_results:
-          paht: test-results          
+          path: test-results          
       - store_artifacts:
           path: test-result
       
