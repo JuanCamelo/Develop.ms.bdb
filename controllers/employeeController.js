@@ -8,20 +8,18 @@ const employeeCommands = require("../infrastructure/commands/employee/EmployeeCo
 
 const employeeQueries = require("../infrastructure/queries/getEmployeeQueriesModule");
 const employeeDTO = require("../infrastructure/models/employeDTO");
+const employeeUpdateDTO = require("../infrastructure/models/employeUpdateDTO");
 
 
 /**
  * Create Employee
  */
 exports.createadEmployee = async (req, res, next) => {
-    try {
+    try {        
         const record = employeeDTO(
-            req.body.fullname,
-            req.body.functions
-        );
-
-        const name = req.body.fullname.toUpperCase();
-        const funtions = req.body.functions.toUpperCase()
+            req.body.employee.fullname,
+            req.body.employee.functios
+        );      
 
         await dbTransaction.beginTransaction();
         const adEmployee = await employeeCommands.createEmployee(record);;
@@ -41,8 +39,8 @@ exports.createadEmployee = async (req, res, next) => {
  */
 exports.updateadEmployee = async (req, res, next) => {
     try {
-        const Name = req.query.fullname;
-        const getEmployeeBy = await employeeQueries.getEmployeeById(Name);
+        const IdEmployee = req.query.employeeid;
+        const getEmployeeBy = await employeeQueries.getEmployeeById(IdEmployee);
 
         //Validate that record exists
         if (getEmployeeBy.length == 0)
@@ -50,27 +48,27 @@ exports.updateadEmployee = async (req, res, next) => {
 
         //Get values to update
         const fullname = req.body.fullname !== undefined ? req.body.fullname : getEmployeeBy[0].fullname;
-        const functions = req.body.functions !== undefined ? req.body.functions : getEmployeeBy[0].functions;
+        const functions = req.body.functios !== undefined ? req.body.functios : getEmployeeBy[0].functios;
 
-        const record = employeeDTO(
-            req.body.fullname,
-            req.body.functions
+        const record = employeeUpdateDTO(
+            fullname,
+            functions
         );
 
-        if (fullname != getEmployeeBy[0].fullname || functions != getEmployeeBy[0].functions) {
+        if (fullname != getEmployeeBy[0].fullname || functions != getEmployeeBy[0].functios) {
             await dbTransaction.beginTransaction();
             //validate exists a record functios
-            if (functions != getEmployeeBy[0].functions) {
+            if (functions != getEmployeeBy[0].functios) {
                 const valfunctions = await employeeQueries.getEmployeeById(functions);
                 if (valfunctions.length >= 1)
                     throw new Error("Exists a relationship boss and Employee");
             };
 
-            await employeeCommands.updateEmployee(record, Name);
+            await employeeCommands.updateEmployee(record,IdEmployee);
             await dbTransaction.commitTransaction();
         };
 
-        response.success(req, res, Name, 201, "Employee record updated successfully!");
+        response.success(req, res, record.fullname , 201, "Employee record updated successfully!");
 
     } catch (error) {
         await dbTransaction.rollbackTransaction();
@@ -87,18 +85,18 @@ exports.updateadEmployee = async (req, res, next) => {
  */
 exports.deleteadEmployee = async (req, res, next) => {
     try {
-        const Name = req.query.fullname;
-        const getEmployeeBy = await employeeQueries.getEmployeeById(Name);
+        const IdEmployee = req.query.employeeid;
+        const getEmployeeBy = await employeeQueries.getEmployeeById(IdEmployee);
 
         //Validate that record exists
         if (getEmployeeBy.length == 0)
             throw new Error("Name not exists");
 
         await dbTransaction.beginTransaction();
-        await employeeCommands.deleteEmployee(Name);
+        await employeeCommands.deleteEmployee(IdEmployee);
         await dbTransaction.commitTransaction();
 
-        response.success(req, res, Name, 201, "Employee record deleted successfully!");
+        response.success(req, res,getEmployeeBy.fullname , 201, "Employee record deleted successfully!");
 
     } catch (error) {
         await dbTransaction.rollbackTransaction();
@@ -116,7 +114,7 @@ exports.getEmployee = async (req, res, next) => {
     try {
 
         const fullname = req.query.fullname != null ? "'" + req.query.fullname + "'" : "p.fullname";
-        const functions = req.query.functions != null ? "'" + req.query.name + "'" : "p.functions";
+        const functions = req.query.functions != null ? "'" + req.query.name + "'" : "p.functios";
         const employees = await employeeQueries.getEmployee(fullname, functions);
         response.success(req, res, employees, 200, employees.length);
 

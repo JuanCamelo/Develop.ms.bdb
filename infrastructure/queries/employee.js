@@ -4,8 +4,8 @@ const getEmployee = async (fullname, functions) => {
     try {
         const sqlQuery = `
             SELECT p. *
-            FROM productos.employee p
-            WHERE p.functions=${functions}  
+            FROM public.employee p
+            WHERE p.functios=${functions}  
             AND p.fullname=${fullname}        
            `
         const result = await pool.DBConnection.query(sqlQuery);

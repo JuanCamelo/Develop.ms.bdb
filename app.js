@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const swaggerUi = require("swagger-ui-express");
-//const logger = require("./config/logsConfig");
+
 const swaggerJsDoc = require("swagger-jsdoc");
 const db = require("./infrastructure/postgresDB");
 const dotenv = require("dotenv");

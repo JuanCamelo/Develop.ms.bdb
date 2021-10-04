@@ -1,10 +1,10 @@
 const pool = require("../../postgresDB");
 const sqlQueries = require("../../sqlQueries/sqlQueriesEmployee");
 
-const updateEmployee = async (params,fullname) => {
+const updateEmployee = async (params,employeeid) => {
     try {
         const result = await pool.DBConnection.query(sqlQueries.UPDATE_EMPLOYEE, [
-            ...Object.values(params), fullname,
+            ...Object.values(params), employeeid,
         ]);
         return result.rows;
     } catch (error) {
