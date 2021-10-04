@@ -1,5 +1,5 @@
 ## develop.MS.DDB
-Para poder ejecutar el servicio en un ambiente local debe recrearse la DB cuyos scripts se encuentran en el repositorio
+Para poder ejecutar el servicio en un ambiente local debe recrearse la DB cuyos backup se encuentran la carpeta ScriptDB
 
 crear carpeta en la raiz del proyecto llamada: .env
 
